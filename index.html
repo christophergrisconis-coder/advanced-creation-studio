@@ -1,36 +1,278 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Creation Studio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0f0f1a;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(90deg, #6366f1, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p {
-      color: #a1a1aa;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Advanced Creation Studio — Interactive guides, trackers &amp; web tools</title>
+<meta name="description" content="Advanced Creation Studio builds interactive game guides, progress trackers, dashboards and web tools that actually work. Built in Concord, North Carolina." />
+<meta property="og:title" content="Advanced Creation Studio" />
+<meta property="og:description" content="Interactive game guides, progress trackers, dashboards and web tools that actually work." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121110'/%3E%3Cpath d='M6 24 16 7l10 17' stroke='%23e08a3c' stroke-width='2.5' fill='none' stroke-linejoin='round'/%3E%3Cpath d='M11 19h10' stroke='%23e08a3c' stroke-width='2.5'/%3E%3C/svg%3E" />
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div>
-    <h1>Advanced Creation Studio</h1>
-    <p>Site coming soon. Ready to edit and deploy.</p>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header" id="header">
+  <div class="shell header__inner">
+    <a class="brand" href="#top" aria-label="Advanced Creation Studio home">
+      <svg class="brand__mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M5 25 16 6l11 19" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M10.5 20.5h11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__text">Advanced Creation<span class="brand__thin"> Studio</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="Switch to light mode"></button>
+      <a class="btn btn--sm" href="#contact">Start a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
   </div>
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="shell hero__inner">
+      <p class="eyebrow reveal">Concord, North Carolina · Est. 2025</p>
+      <h1 class="hero__title reveal">We build the tool<br />that finishes the job.</h1>
+      <p class="hero__lead reveal">Advanced Creation Studio designs interactive guides, progress trackers, dashboards and small web tools. Real checkboxes. Real data. Nothing decorative that doesn't work.</p>
+      <div class="hero__cta reveal">
+        <a class="btn" href="#contact">Start a project</a>
+        <a class="btn btn--ghost" href="#work">See the work</a>
+      </div>
+      <dl class="stats reveal">
+        <div><dt>Projects shipped</dt><dd data-count="14">0</dd></div>
+        <div><dt>Guide entries tracked</dt><dd data-count="2400" data-suffix="+">0</dd></div>
+        <div><dt>Avg. build time</dt><dd data-count="7" data-suffix=" days">0</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Interactive Guides</span><span aria-hidden="true">◆</span>
+      <span>Completion Trackers</span><span aria-hidden="true">◆</span>
+      <span>Dashboards</span><span aria-hidden="true">◆</span>
+      <span>Landing Pages</span><span aria-hidden="true">◆</span>
+      <span>React Native Apps</span><span aria-hidden="true">◆</span>
+      <span>Deployment &amp; Domains</span><span aria-hidden="true">◆</span>
+      <span>Interactive Guides</span><span aria-hidden="true">◆</span>
+      <span>Completion Trackers</span><span aria-hidden="true">◆</span>
+      <span>Dashboards</span><span aria-hidden="true">◆</span>
+      <span>Landing Pages</span><span aria-hidden="true">◆</span>
+      <span>React Native Apps</span><span aria-hidden="true">◆</span>
+      <span>Deployment &amp; Domains</span><span aria-hidden="true">◆</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="shell">
+      <div class="section__head reveal">
+        <p class="eyebrow">What we do</p>
+        <h2 class="section__title">Four things, done properly.</h2>
+        <p class="section__lead">Every build follows one rule: visible functionality first, real interaction second, styling third.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card__num">01</span>
+          <h3>Interactive Game Guides</h3>
+          <p>Full completion guides with checklists, filters, maps and saved progress. Built for players who want 100%, not a wall of text.</p>
+          <ul class="tags"><li>Checklists</li><li>Maps</li><li>Local save</li></ul>
+        </article>
+        <article class="card reveal">
+          <span class="card__num">02</span>
+          <h3>Trackers &amp; Dashboards</h3>
+          <p>Spending trackers, sales pipelines, habit boards, project dashboards. Live totals, working controls, export your data anytime.</p>
+          <ul class="tags"><li>Charts</li><li>Filters</li><li>CSV export</li></ul>
+        </article>
+        <article class="card reveal">
+          <span class="card__num">03</span>
+          <h3>Sites &amp; Landing Pages</h3>
+          <p>Fast, responsive, accessible pages for small businesses and creators. Light and dark mode standard. Loads in under two seconds.</p>
+          <ul class="tags"><li>Responsive</li><li>SEO</li><li>Dark mode</li></ul>
+        </article>
+        <article class="card reveal">
+          <span class="card__num">04</span>
+          <h3>Deploy &amp; Domain Setup</h3>
+          <p>GitHub Pages, Cloudflare, custom domains, SSL, DNS. We hand you the keys and the instructions — no lock-in, no mystery.</p>
+          <ul class="tags"><li>GitHub</li><li>Cloudflare</li><li>DNS</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section section--offset" id="work">
+    <div class="shell">
+      <div class="section__head reveal">
+        <p class="eyebrow">Selected work</p>
+        <h2 class="section__title">Shipped, live, and used.</h2>
+      </div>
+
+      <div class="filters reveal" role="group" aria-label="Filter projects">
+        <button class="chip is-active" data-filter="all" type="button">All</button>
+        <button class="chip" data-filter="guide" type="button">Guides</button>
+        <button class="chip" data-filter="app" type="button">Apps</button>
+        <button class="chip" data-filter="site" type="button">Sites</button>
+      </div>
+
+      <div class="work" id="workGrid">
+        <article class="work__item reveal" data-type="guide">
+          <div class="work__thumb work__thumb--a" aria-hidden="true"><span>100%</span></div>
+          <div class="work__body">
+            <p class="work__meta">Interactive Guide · 2026</p>
+            <h3>007 First Light — Complete Guide</h3>
+            <p>Mission-by-mission walkthrough with collectible checklists and persistent completion tracking.</p>
+          </div>
+        </article>
+
+        <article class="work__item reveal" data-type="guide">
+          <div class="work__thumb work__thumb--b" aria-hidden="true"><span>RDR2</span></div>
+          <div class="work__body">
+            <p class="work__meta">Interactive Guide · 2026</p>
+            <h3>Red Dead Redemption 2 — Journey Guide</h3>
+            <p>Chapter tracker, hunting and challenge checklists, and a searchable index across 700+ entries.</p>
+          </div>
+        </article>
+
+        <article class="work__item reveal" data-type="guide">
+          <div class="work__thumb work__thumb--c" aria-hidden="true"><span>AC</span></div>
+          <div class="work__body">
+            <p class="work__meta">Interactive Guide · 2026</p>
+            <h3>AC Shadows — Completion Guide</h3>
+            <p>Region-by-region completion board with select-all, clear-all and per-section progress bars.</p>
+          </div>
+        </article>
+
+        <article class="work__item reveal" data-type="app">
+          <div class="work__thumb work__thumb--d" aria-hidden="true"><span>APP</span></div>
+          <div class="work__body">
+            <p class="work__meta">Training App · 2026</p>
+            <h3>Legacy Home Remodeling — Training App</h3>
+            <p>Modular onboarding app for a remodeling crew. Lessons, quizzes and completion status per employee.</p>
+          </div>
+        </article>
+
+        <article class="work__item reveal" data-type="site">
+          <div class="work__thumb work__thumb--e" aria-hidden="true"><span>WWW</span></div>
+          <div class="work__body">
+            <p class="work__meta">Business Site · 2026</p>
+            <h3>Growth &amp; Development Sales</h3>
+            <p>Lead-focused single page with service breakdown, proof section and one unmissable call to action.</p>
+          </div>
+        </article>
+
+        <article class="work__item reveal" data-type="app">
+          <div class="work__thumb work__thumb--f" aria-hidden="true"><span>$</span></div>
+          <div class="work__body">
+            <p class="work__meta">Tracker · 2026</p>
+            <h3>Money Marathon — Spending Tracker</h3>
+            <p>Category budgets, rolling monthly totals, and a debt payoff view. Offline-friendly with CSV backup.</p>
+          </div>
+        </article>
+      </div>
+      <p class="work__empty" id="workEmpty" hidden>No projects in this category yet.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="shell process">
+      <div class="process__intro reveal">
+        <p class="eyebrow">How it goes</p>
+        <h2 class="section__title">Four steps. No mystery.</h2>
+        <p class="section__lead">You always know what stage we're in and what you're getting at the end of it.</p>
+        <a class="btn btn--ghost" href="#contact">Book a build slot</a>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><span class="steps__n">1</span><div><h3>Scope the outcome</h3><p>We define exactly what the finished thing must do before a single line is written.</p></div></li>
+        <li class="reveal"><span class="steps__n">2</span><div><h3>Build the working core</h3><p>Functionality first. You see a real, clickable version early — not a picture of one.</p></div></li>
+        <li class="reveal"><span class="steps__n">3</span><div><h3>Verify feature by feature</h3><p>Every requested control gets checked live. If it isn't visibly working, it isn't done.</p></div></li>
+        <li class="reveal"><span class="steps__n">4</span><div><h3>Ship and hand over</h3><p>Deployed to your repo and your domain, with plain-English instructions to run it yourself.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section--offset" id="about">
+    <div class="shell about">
+      <div class="about__text reveal">
+        <p class="eyebrow">About the studio</p>
+        <h2 class="section__title">A small studio with a long memory for detail.</h2>
+        <p>Advanced Creation Studio started with one stubborn idea: the guides and trackers people actually need were never built well, so we'd build them ourselves. That turned into completion guides, business dashboards, training apps and client sites.</p>
+        <p>We work small on purpose. One project gets full attention, one clean build gets delivered, and you get the source. Based in Concord, North Carolina, working with clients anywhere.</p>
+        <ul class="ticks">
+          <li>Source code handed over on every project</li>
+          <li>Light and dark mode as standard, not an upsell</li>
+          <li>Accessible, keyboard-navigable, mobile-first</li>
+        </ul>
+      </div>
+      <figure class="quote reveal">
+        <blockquote>“Don't tell me it's fixed. Show me it working.”</blockquote>
+        <figcaption>The studio rule, taped to the desk</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="shell contact__inner reveal">
+      <p class="eyebrow">Start a project</p>
+      <h2 class="section__title">Tell us what it needs to do.</h2>
+      <p class="section__lead">Send the outcome you want. You'll get a scope, a timeline and a flat price back — usually same day.</p>
+      <form class="form" id="contactForm" novalidate>
+        <div class="form__row">
+          <label class="field"><span>Name</span><input type="text" name="name" required autocomplete="name" /></label>
+          <label class="field"><span>Email</span><input type="email" name="email" required autocomplete="email" /></label>
+        </div>
+        <label class="field"><span>What are we building?</span><textarea name="brief" rows="4" required placeholder="A completion tracker for a game, a spending dashboard, a landing page…"></textarea></label>
+        <button class="btn" type="submit">Send the brief</button>
+        <p class="form__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <div>
+      <a class="brand" href="#top" aria-label="Advanced Creation Studio home">
+        <svg class="brand__mark" width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M5 25 16 6l11 19" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M10.5 20.5h11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__text">Advanced Creation<span class="brand__thin"> Studio</span></span>
+      </a>
+      <p class="footer__note">Interactive guides, trackers and web tools. Concord, North Carolina.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="shell footer__base"><p>© <span id="yr">2026</span> Advanced Creation Studio. All rights reserved.</p></div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
