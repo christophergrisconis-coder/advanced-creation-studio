@@ -1,0 +1,10 @@
+# Cloudflare Workers — static assets deployment
+# Serves the site files in this repo root at advancedcreationstudio.com
+# Deploy command (set in the Cloudflare dashboard): npx wrangler deploy
+
+name = "advanced-creation-studio"
+compatibility_date = "2026-01-01"
+
+[assets]
+directory = "./"
+not_found_handling = "404-page"

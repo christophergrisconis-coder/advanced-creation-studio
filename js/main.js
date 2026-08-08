@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
 });
 
-/* Mobile nav toggle */
 function initMobileNav() {
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav-toggle');
@@ -23,16 +22,15 @@ function initMobileNav() {
   });
 }
 
-/* Highlight the current page in the nav */
 function initActiveLink() {
   const current = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.classList.remove('is-active');
     const href = link.getAttribute('href');
     if (href === current) link.classList.add('is-active');
   });
 }
 
-/* Fade/slide elements in as they enter the viewport */
 function initScrollReveal() {
   const targets = document.querySelectorAll('.reveal');
   if (!targets.length) return;
@@ -57,49 +55,93 @@ function initScrollReveal() {
   targets.forEach((el) => observer.observe(el));
 }
 
-/* Keep the footer copyright year current */
 function initFooterYear() {
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = new Date().getFullYear();
   });
 }
 
-/* Basic client-side validation + submit feedback for the contact form.
-   Replace the form's `action` attribute with your endpoint (Formspree,
-   a serverless function, etc.) before going live — see README. */
 function initContactForm() {
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
   const status = form.querySelector('.form-status');
+  const button = form.querySelector('button[type="submit"]');
+  const defaultButtonText = button ? button.textContent.trim() : 'Submit';
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     const requiredFields = form.querySelectorAll('[required]');
     let valid = true;
 
     requiredFields.forEach((field) => {
       if (!field.value.trim()) {
         valid = false;
-        field.style.borderColor = '#E23D3D';
+        field.style.borderColor = '#c0392b';
       } else {
         field.style.borderColor = '';
       }
     });
 
     if (!valid) {
-      e.preventDefault();
       if (status) {
         status.textContent = 'Please complete all required fields before submitting.';
-        status.style.color = '#E23D3D';
+        status.className = 'form-status error';
       }
       return;
     }
 
-    if (form.getAttribute('action') === '#') {
-      e.preventDefault();
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
+    if (status) {
+      status.textContent = '';
+      status.className = 'form-status';
+    }
+
+    const data = new FormData(form);
+    const fullName = `${data.get('firstName') || ''} ${data.get('lastName') || ''}`.trim();
+    const interest = data.get('interest') || '';
+    const agency = data.get('agency') || '';
+    const messageBody = [
+      data.get('message'),
+      agency ? `\n\nAgency / Organization: ${agency}` : '',
+      interest ? `\nInterest: ${interest}` : '',
+    ].join('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '72239a69-b442-4dbf-a123-ce28ba9b5d95',
+          subject: 'New partnership inquiry — Advanced Creation Studio',
+          from_name: fullName || 'Website visitor',
+          email: data.get('email'),
+          message: messageBody,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        if (status) {
+          status.textContent = 'Message received. We will follow up shortly.';
+          status.className = 'form-status success';
+        }
+        form.reset();
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
       if (status) {
-        status.textContent = 'This form is not yet connected to a submission endpoint. See README.md for setup instructions.';
-        status.style.color = '#1E90FF';
+        status.textContent = 'Something went wrong. Please try again or reach out directly by email.';
+        status.className = 'form-status error';
+      }
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = defaultButtonText;
       }
     }
   });

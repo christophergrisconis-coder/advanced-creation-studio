@@ -2,3 +2,5 @@
 node_modules/
 .vscode/
 *.log
+_reference-*
+_footer.html

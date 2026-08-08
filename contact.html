@@ -43,8 +43,8 @@
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumb">Contact</div>
-    <h1>Let's partner.</h1>
-    <p>Connect with us to learn how we can advance safer, stronger communities together.</p>
+    <h1>Let's Partner</h1>
+    <p>Connect with us to learn how we can advance safer communities together.</p>
   </div>
 </section>
 
@@ -55,12 +55,8 @@
       <h3 style="margin-bottom:6px;">Send an Inquiry</h3>
       <p style="font-size:0.92rem; margin-bottom:26px;">Tell us about your agency and the work you're scoping — we'll follow up within two business days.</p>
 
-      <!--
-        This form currently points to "#" as a placeholder.
-        Connect it to a real endpoint before publishing — see README.md
-        for options (Formspree, a serverless function, your own backend, etc.)
-      -->
-      <form id="contact-form" action="#" method="POST">
+      <!-- Submits via Web3Forms — same endpoint as production live site -->
+      <form id="contact-form" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name *</label>
@@ -100,7 +96,7 @@
           Submit Inquiry
           <svg class="btn-arrow" viewBox="0 0 10 10" fill="none"><path d="M1 1L8 5L1 9" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-status" style="margin-top:14px; font-size:0.85rem;"></p>
+        <p class="form-status" aria-live="polite" style="margin-top:14px; font-size:0.85rem;"></p>
       </form>
     </div>
 
@@ -114,8 +110,7 @@
           </div>
           <div>
             <h4>Email</h4>
-            <p><a href="mailto:hello@advancedcreationstudio.com">hello@advancedcreationstudio.com</a></p>
-            <span class="placeholder-note">Replace with your real inbox</span>
+            <p><a href="mailto:chrisgrisconis@icloud.com">chrisgrisconis@icloud.com</a></p>
           </div>
         </div>
         <div class="contact-info-item">
@@ -124,8 +119,7 @@
           </div>
           <div>
             <h4>Phone</h4>
-            <p>[YOUR PHONE NUMBER]</p>
-            <span class="placeholder-note">Replace with your real number</span>
+            <p><a href="tel:+19809809449">(980) 980-9449</a><br><a href="tel:+19806808909">(980) 680-8909</a></p>
           </div>
         </div>
         <div class="contact-info-item">
@@ -133,9 +127,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C12 22 20 16 20 10C20 5.58 16.42 2 12 2C7.58 2 4 5.58 4 10C4 16 12 22 12 22Z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div>
-            <h4>Office</h4>
-            <p>[YOUR ADDRESS]<br>[City, State ZIP]</p>
-            <span class="placeholder-note">Replace with your real address</span>
+            <h4>Location</h4>
+            <p>North Carolina — serving federal, state, and community partners nationwide.</p>
           </div>
         </div>
         <div class="contact-info-item">
@@ -157,8 +150,8 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo-white.svg" alt="Advanced Creation Studio logo">
-        <p>One brand. Every touchpoint. Built for trust and compliance with federal and state government partners.</p>
+        <img src="assets/logo-mono.svg" alt="Advanced Creation Studio logo">
+        <p>Reentry with Dignity. Results with Purpose. Trusted partner to federal and state governments for evidence-based reentry and reintegration.</p>
       </div>
       <div class="footer-col">
         <h4>Site</h4>
@@ -182,15 +175,16 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:hello@advancedcreationstudio.com">hello@advancedcreationstudio.com</a></li>
-          <li><a href="tel:+10000000000">[YOUR PHONE NUMBER]</a></li>
+          <li><a href="mailto:chrisgrisconis@icloud.com">chrisgrisconis@icloud.com</a></li>
+          <li><a href="tel:+19809809449">(980) 980-9449</a></li>
+          <li><a href="tel:+19806808909">(980) 680-8909</a></li>
           <li><a href="contact.html">Submit an Inquiry</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-year>2026</span> Advanced Creation Studio. All rights reserved.</span>
-      <span>Clear. Consistent. Confident.</span>
+      <span>Reentry with Dignity. Results with Purpose.</span>
     </div>
   </div>
 </footer>
