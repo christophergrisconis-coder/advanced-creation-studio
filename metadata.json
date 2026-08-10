@@ -1,0 +1,6 @@
+{
+  "name": "Advanced Creation Studio",
+  "description": "Government-facing creative strategy studio specializing in recidivism reduction programs, AI video production, and contract-ready deliverables.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
