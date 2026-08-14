@@ -4,7 +4,7 @@
  * asymmetric field-brief layout, dense uppercase Archivo display, precise Source Sans body.
  */
 import { ArrowDownRight, ArrowUpRight, Check, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const capabilities = [
   {
@@ -32,9 +32,39 @@ const principles = [
 
 const navItems = [
   { label: "Focus", target: "focus" },
+  { label: "Tools", target: "tools" },
   { label: "Approach", target: "approach" },
   { label: "Mission", target: "mission" },
 ];
+
+const toolSuites = [
+  {
+    number: "01",
+    label: "ACS SIGNAL / NOTE-TO-ACTION",
+    title: "Make the handoff visible before it becomes a miss.",
+    purpose: "A practical workflow for converting notes, transcripts, and intake material into a structured action map that people can review, assign, and move forward.",
+    workflow: ["Locate commitments, questions, and dates", "Sort actions by urgency and owner", "Preserve source context for review"],
+    outputs: ["Action maps", "Owner flags", "Follow-up summaries"],
+    safeguard: "Built for accountable human review—not automated decision-making.",
+  },
+  {
+    number: "02",
+    label: "ACS CASEWORK / LEGAL SUPPORT",
+    title: "Start legal-support work with a clearer case picture.",
+    purpose: "A structured preparation layer for legal teams that need a usable view of matter context, documents, deadlines, questions, and next tasks before the work is handed off.",
+    workflow: ["Organize matter facts and document lists", "Surface dates, missing items, and preparation tasks", "Create a review-ready work packet"],
+    outputs: ["Matter summaries", "Task packets", "Deadline checklists"],
+    safeguard: "Supports legal professionals and staff; it does not provide legal advice or make legal decisions.",
+  },
+];
+
+type InquiryFields = {
+  name: string;
+  email: string;
+  organization: string;
+  workflow: string;
+  message: string;
+};
 
 function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -42,10 +72,46 @@ function scrollToSection(id: string) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [inquiry, setInquiry] = useState<InquiryFields>({ name: "", email: "", organization: "", workflow: "", message: "" });
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof InquiryFields, string>>>({});
+  const [submitted, setSubmitted] = useState(false);
 
   const handleNavigate = (target: string) => {
     scrollToSection(target);
     setMenuOpen(false);
+  };
+
+  const updateInquiry = (field: keyof InquiryFields, value: string) => {
+    setInquiry((current) => ({ ...current, [field]: value }));
+    setFieldErrors((current) => ({ ...current, [field]: undefined }));
+    setSubmitted(false);
+  };
+
+  const submitInquiry = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors: Partial<Record<keyof InquiryFields, string>> = {};
+
+    if (!inquiry.name.trim()) nextErrors.name = "Please provide your name.";
+    if (!inquiry.email.trim()) nextErrors.email = "Please provide an email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email)) nextErrors.email = "Please enter a valid email address.";
+    if (!inquiry.workflow) nextErrors.workflow = "Select the type of conversation you need.";
+    if (inquiry.message.trim().length < 20) nextErrors.message = "Please share at least a sentence about the work you are exploring.";
+
+    if (Object.keys(nextErrors).length) {
+      setFieldErrors(nextErrors);
+      setSubmitted(false);
+      return;
+    }
+
+    setFieldErrors({});
+    setSubmitted(true);
+    const emailSubject = encodeURIComponent(`Workflow conversation — ${inquiry.workflow}`);
+    const emailBody = encodeURIComponent(
+      `Name: ${inquiry.name}\nOrganization: ${inquiry.organization || "Not provided"}\nEmail: ${inquiry.email}\nConversation type: ${inquiry.workflow}\n\nWhat they are exploring:\n${inquiry.message}`,
+    );
+    window.setTimeout(() => {
+      window.location.href = `mailto:hello@advancedcreation.studio?subject=${emailSubject}&body=${emailBody}`;
+    }, 180);
   };
 
   return (
@@ -151,6 +217,48 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="tools" className="acs-tools-section" aria-labelledby="tools-heading">
+          <div className="acs-tools-heading">
+            <div>
+              <p className="acs-kicker"><span>TOOLS</span> Current capability direction</p>
+              <h2 id="tools-heading">TWO PRACTICAL<br />SYSTEMS. <em>ONE CLEARER<br />WAY FORWARD.</em></h2>
+            </div>
+            <div className="acs-tools-aside">
+              <p>These tools are designed as focused operating layers—not generic chat interfaces. They help teams move responsibly from recorded information to organized, reviewable work.</p>
+              <a className="acs-download-link" href="/manus-storage/advanced-creation-studio-capability-brief_b4a75622.pdf" target="_blank" rel="noreferrer" download>
+                <span>Download capability brief</span><ArrowDownRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          <div className="acs-tool-list">
+            {toolSuites.map((tool) => (
+              <article className="acs-tool-card" key={tool.number}>
+                <div className="acs-tool-index"><span>{tool.number}</span><i /></div>
+                <div className="acs-tool-main">
+                  <p className="acs-tool-label">{tool.label}</p>
+                  <h3>{tool.title}</h3>
+                  <p>{tool.purpose}</p>
+                  <div className="acs-tool-outputs">
+                    {tool.outputs.map((output) => <span key={output}>{output}</span>)}
+                  </div>
+                </div>
+                <div className="acs-tool-detail">
+                  <p className="acs-detail-label">WORKFLOW LAYER</p>
+                  <ol>
+                    {tool.workflow.map((step, index) => <li key={step}><span>0{index + 1}</span>{step}</li>)}
+                  </ol>
+                  <p className="acs-tool-safeguard"><Check size={15} strokeWidth={2.7} />{tool.safeguard}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="acs-tools-footer">
+            <span>IMPLEMENTATION POSTURE</span>
+            <p>Concept capability and partnership exploration underway. The right first engagement is scoped around a defined workflow, clear review standards, and practical operating outcomes.</p>
+          </div>
+        </section>
+
         <section id="approach" className="acs-approach-section">
           <div className="acs-approach-visual">
             <img src="/manus-storage/acs-systems-detail_43620d81.jpg" alt="Abstract studio arrangement of paper, rules, and a red routing ribbon" />
@@ -175,20 +283,68 @@ export default function Home() {
               <p>Advanced Creation Studio is being built for durable impact. The systems we develop today are part of a longer-term commitment to practical support for people navigating reentry after incarceration.</p>
               <p>We believe operational clarity, well-designed tools, and institutional partnerships can help create more stable pathways forward—without treating people as problems to be managed.</p>
             </div>
+            <div className="acs-mission-bridge">
+              <div><span>PRODUCT LOGIC</span><b>Clear intake, accountable handoffs, and visible next steps.</b></div>
+              <ArrowDownRight aria-hidden="true" size={18} />
+              <div><span>MISSION HORIZON</span><b>Practical continuity designed for stronger pathways forward.</b></div>
+            </div>
             <div className="acs-mission-rule"><span>MISSION HORIZON</span><b>Practical systems for stronger reentry outcomes.</b></div>
           </div>
         </section>
 
         <section id="contact" className="acs-contact-section">
           <div className="acs-contact-heading">
-            <p className="acs-kicker"><span>CONTACT</span> BUILD WITH INTENTION</p>
-            <h2>Let’s make the work<br /><em>more workable.</em></h2>
+            <p className="acs-kicker"><span>CONTACT</span> INQUIRY PROTOCOL</p>
+            <h2>BEGIN WITH A<br /><em>SCOPED BRIEF.</em></h2>
+            <div className="acs-contact-protocol">
+              <span>01 / EXISTING INPUTS</span>
+              <span>02 / REVIEW STANDARD</span>
+              <span>03 / PRACTICAL OUTCOME</span>
+            </div>
           </div>
           <div className="acs-contact-panel">
-            <p>Whether you are exploring an internal workflow challenge, a partnership opportunity, or a contract-ready capability, we welcome a focused conversation.</p>
-            <a className="acs-button-primary" href="mailto:hello@advancedcreation.studio?subject=Workflow%20conversation%20with%20Advanced%20Creation%20Studio">
-              Start an inquiry <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+            <p>Tell us where a defined workflow is breaking down, what review standard the work must meet, and what a practical next step would make possible.</p>
+            <form className="acs-inquiry-form" onSubmit={submitInquiry} noValidate>
+              <div className="acs-form-grid">
+                <label>
+                  <span>Name <b>*</b></span>
+                  <input value={inquiry.name} onChange={(event) => updateInquiry("name", event.target.value)} aria-invalid={Boolean(fieldErrors.name)} aria-describedby={fieldErrors.name ? "name-error" : undefined} autoComplete="name" />
+                  {fieldErrors.name && <small id="name-error">{fieldErrors.name}</small>}
+                </label>
+                <label>
+                  <span>Work email <b>*</b></span>
+                  <input type="email" value={inquiry.email} onChange={(event) => updateInquiry("email", event.target.value)} aria-invalid={Boolean(fieldErrors.email)} aria-describedby={fieldErrors.email ? "email-error" : undefined} autoComplete="email" />
+                  {fieldErrors.email && <small id="email-error">{fieldErrors.email}</small>}
+                </label>
+              </div>
+              <div className="acs-form-grid">
+                <label>
+                  <span>Organization</span>
+                  <input value={inquiry.organization} onChange={(event) => updateInquiry("organization", event.target.value)} autoComplete="organization" />
+                </label>
+                <label>
+                  <span>Conversation type <b>*</b></span>
+                  <select value={inquiry.workflow} onChange={(event) => updateInquiry("workflow", event.target.value)} aria-invalid={Boolean(fieldErrors.workflow)} aria-describedby={fieldErrors.workflow ? "workflow-error" : undefined}>
+                    <option value="">Select one</option>
+                    <option value="Note-to-action workflow">Note-to-action workflow</option>
+                    <option value="Legal-support workflow">Legal-support workflow</option>
+                    <option value="Partnership or contract">Partnership or contract</option>
+                    <option value="Other inquiry">Other inquiry</option>
+                  </select>
+                  {fieldErrors.workflow && <small id="workflow-error">{fieldErrors.workflow}</small>}
+                </label>
+              </div>
+              <label className="acs-message-field">
+                <span>What are you exploring? <b>*</b></span>
+                <textarea rows={3} value={inquiry.message} onChange={(event) => updateInquiry("message", event.target.value)} aria-invalid={Boolean(fieldErrors.message)} aria-describedby={fieldErrors.message ? "message-error" : undefined} placeholder="Tell us about the workflow, organization, or opportunity." />
+                {fieldErrors.message && <small id="message-error">{fieldErrors.message}</small>}
+              </label>
+              <div className="acs-form-submit-row">
+                <button className="acs-button-primary" type="submit">Prepare inquiry <ArrowUpRight size={18} aria-hidden="true" /></button>
+                <span className="acs-form-helper">Opens a prefilled email after validation.</span>
+              </div>
+              {submitted && <p className="acs-form-success" role="status">Your inquiry is prepared. Your email application should open now.</p>}
+            </form>
             <span className="acs-contact-note">Responses are scoped thoughtfully. No automated sales sequence.</span>
           </div>
         </section>

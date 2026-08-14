@@ -1,0 +1,11 @@
+{
+  "task_kind": "new-document",
+  "output": "pdf",
+  "signals": ["one-page capability brief", "enterprise workflow"],
+  "hard_constraints": ["single-page document", "institutional editorial visual system"],
+  "content_features": {
+    "code_blocks": 0,
+    "defined_terms": 2,
+    "portrait_images": 0
+  }
+}
