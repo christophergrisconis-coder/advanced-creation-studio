@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import { TabType } from './types';
+import { TabType, TAB_PATHS, getTabFromPath } from './types';
 import { HeaderNavigation } from './components/HeaderNavigation';
 import { HeroOverview } from './components/HeroOverview';
 import { FlagshipPortal } from './components/FlagshipPortal';
@@ -9,7 +9,24 @@ import { CapabilitiesSection } from './components/CapabilitiesSection';
 import { ContactPortal } from './components/ContactPortal';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
+  const [activeTab, setActiveTabState] = useState<TabType>(() =>
+          typeof window !== 'undefined' ? getTabFromPath(window.location.pathname) : 'overview'
+        );
+
+      const setActiveTab = (tab: TabType) => {
+              setActiveTabState(tab);
+              if (typeof window !== 'undefined') {
+                        window.history.pushState({}, '', TAB_PATHS[tab]);
+              }
+      };
+
+      useEffect(() => {
+              const handlePopState = () => {
+                        setActiveTabState(getTabFromPath(window.location.pathname));
+              };
+              window.addEventListener('popstate', handlePopState);
+              return () => window.removeEventListener('popstate', handlePopState);
+      }, []);
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return true; // Default to dark mode for high-contrast luxury/authoritative agency theme
