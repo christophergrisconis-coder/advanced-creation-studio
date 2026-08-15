@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TabType } from '../types';
+import { TabType, TAB_PATHS } from '../types';
 import { Sun, Moon, ShieldCheck, Clapperboard, Layers, FileText, Mail, Sparkles, Globe, Languages, Check, ChevronDown } from 'lucide-react';
 
 export interface LanguageOption {
@@ -272,10 +272,11 @@ export function HeaderNavigation({
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
-              <button
+                        <a
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                          href={TAB_PATHS[tab.id]}
+                onClick={(e) => { e.preventDefault(); setActiveTab(tab.id); }}
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap cursor-pointer transition-all ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -283,7 +284,7 @@ export function HeaderNavigation({
               >
                 {tab.icon}
                 <span>{tab.label}</span>
-              </button>
+                        </a>
             );
           })}
         </div>
