@@ -1,5 +1,20 @@
 export type TabType = 'overview' | 'flagship' | 'features' | 'capabilities' | 'contact';
 
+export const TAB_PATHS: Record<TabType, string> = {
+    overview: '/',
+    flagship: '/flagship-reentry-program',
+    features: '/features-ai-classes',
+    capabilities: '/government-capabilities',
+    contact: '/proposals-contact',
+};
+
+export function getTabFromPath(pathname: string): TabType {
+    const match = (Object.entries(TAB_PATHS) as [TabType, string][]).find(
+          ([, path]) => path === pathname
+              );
+    return match ? match[0] : 'overview';
+}
+
 export interface VideoScene {
   id: number;
   timeRange: string;
